@@ -47,13 +47,13 @@ namespace TransformerLoadLosses
 
         //перегруженный метод создает массив точек для построения графика нагрузочных потерь одного трансформатора,
 
-        public static double[] LoadLossesTrans(Transformator PRIME)
+        //возвращает массив значений для переменной мощности осьХ
+        public static double[] LoadLossesTrans(int step, int length)
         {
-            int step = 800;
-           
-            double[] VariablePower = new double[(int)PRIME.Snom * 2 + 1];
+                      
+            double[] VariablePower = new double[length];
 
-            for (int i = 0; i <= PRIME.Snom * 2; i += step)
+            for (int i = 0; i <= length; i += step)
             {
                 VariablePower[i] = i;
             }
@@ -61,7 +61,8 @@ namespace TransformerLoadLosses
             return VariablePower;
         }
 
-        public static double[] LoadLossesOneTrans(Transformator PRIME)
+        //массив значений нагрузочных потерь одного трансформатора осьY
+        public static double[] LoadLossesTrans(Transformator PRIME)
         {
             int step = 800;
             double[] ArrOneTrans = new double[(int)PRIME.Snom * 2 + 1];
@@ -77,7 +78,7 @@ namespace TransformerLoadLosses
             return ArrOneTrans;
         }
 
-        //метод создает массив точек для построения графика нагрузочных потерь двух параллельных трансформатора
+        //массив значений нагрузочных потерь двух параллельных трансформаторов осьY 
         public static double[] LoadLossesTrans(Transformator PRIME, Transformator SECOND)
         {
             int step = 800;

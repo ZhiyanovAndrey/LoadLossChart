@@ -31,13 +31,16 @@ namespace LoadLossChart
             Transformator PRIME = new Transformator(55, 16000, 14805, 18175);
             Transformator SECOND = new Transformator(55, 16000, 9750, 32390);
             int step = 800;
-            int lengh = PRIME.Snom;
+            int length = (int)PRIME.Snom * 2 + 1;
 
 
-            double[] dataX = Transformator.LoadLossesTrans(PRIME);
-            double[] dataY = Transformator.LoadLossesTrans(PRIME,SECOND);
+            double[] dataX = Transformator.LoadLossesTrans(step, length);
+            double[] dataY = Transformator.LoadLossesTrans(PRIME);
+            double[] dataTwoY = Transformator.LoadLossesTrans(PRIME, SECOND);
+
             double[] sine = DataGen.Sin(600, 3);
             WPFDiagram.Plot.AddScatter(dataX, dataY);
+            WPFDiagram.Plot.AddScatter(dataX, dataTwoY);
             WPFDiagram.Refresh();
         }
     }
