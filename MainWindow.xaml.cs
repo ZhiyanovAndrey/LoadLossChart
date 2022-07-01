@@ -35,12 +35,16 @@ namespace LoadLossChart
 
 
             double[] dataX = Transformator.LoadLossesTrans(step, length);
-            double[] dataY = Transformator.LoadLossesTrans(PRIME);
-            double[] dataTwoY = Transformator.LoadLossesTrans(PRIME, SECOND);
+            double[] dataY = Transformator.LoadLossesTrans(step, PRIME);
+            double[] dataTwoY = Transformator.LoadLossesTrans(step, PRIME, SECOND);
 
+            WPFDiagram.Plot.AddSignal(dataY);
             double[] sine = DataGen.Sin(600, 3);
+
+
             WPFDiagram.Plot.AddScatter(dataX, dataY);
             WPFDiagram.Plot.AddScatter(dataX, dataTwoY);
+
             WPFDiagram.Refresh();
         }
     }

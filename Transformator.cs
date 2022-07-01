@@ -62,9 +62,9 @@ namespace TransformerLoadLosses
         }
 
         //массив значений нагрузочных потерь одного трансформатора осьY
-        public static double[] LoadLossesTrans(Transformator PRIME)
+        public static double[] LoadLossesTrans(int step, Transformator PRIME)
         {
-            int step = 800;
+            
             double[] ArrOneTrans = new double[(int)PRIME.Snom * 2 + 1];
 
 
@@ -79,9 +79,9 @@ namespace TransformerLoadLosses
         }
 
         //массив значений нагрузочных потерь двух параллельных трансформаторов осьY 
-        public static double[] LoadLossesTrans(Transformator PRIME, Transformator SECOND)
+        public static double[] LoadLossesTrans(int step, Transformator PRIME, Transformator SECOND)
         {
-            int step = 800;
+     
             double[] ArrTwoTrans = new double[(int)PRIME.Snom * 2 + 1];
             int[] VariablePower = new int[(int)PRIME.Snom * 2 + 1];
 
