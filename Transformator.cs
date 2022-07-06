@@ -45,17 +45,17 @@ namespace TransformerLoadLosses
 
         }
 
-        //перегруженный метод создает массив точек для построения графика нагрузочных потерь одного трансформатора,
+        //перегруженный метод создает массив точек для построения графика нагрузочных потерь трансформатора
 
         //возвращает массив значений для переменной мощности осьХ
-        public static double[] LoadLossesTrans(int step, int length)
+        public static double[] LoadLossesTrans(int step, double length)
         {
-                      
-            double[] VariablePower = new double[length];
 
-            for (int i = 0; i <= length; i += step)
+            double[] VariablePower = new double[(int)(length / step) + 1];
+
+            for (int i = 0; i < VariablePower.Length; i++)
             {
-                VariablePower[i] = i;
+                VariablePower[i] = i * step;
             }
 
             return VariablePower;
@@ -64,14 +64,15 @@ namespace TransformerLoadLosses
         //массив значений нагрузочных потерь одного трансформатора осьY
         public static double[] LoadLossesTrans(int step, Transformator PRIME)
         {
-            
-            double[] ArrOneTrans = new double[(int)PRIME.Snom * 2 + 1];
+
+            double[] ArrOneTrans = new double[(int)(PRIME.Snom * 2 / step) + 1];
 
 
-            for (int i = 0; i <= PRIME.Snom * 2; i += step)
+            for (int i = 0; i < ArrOneTrans.Length; i ++)
             {
                 //формула для графика нагрузочных потерь одного трансформатора
-                ArrOneTrans[i] = Math.Pow(i / PRIME.Snom, 2) * PRIME.Pкз + PRIME.Pxx;
+
+                ArrOneTrans[i] = Math.Pow(i*step / PRIME.Snom, 2) * PRIME.Pкз + PRIME.Pxx;
 
             }
 
@@ -81,14 +82,13 @@ namespace TransformerLoadLosses
         //массив значений нагрузочных потерь двух параллельных трансформаторов осьY 
         public static double[] LoadLossesTrans(int step, Transformator PRIME, Transformator SECOND)
         {
-     
-            double[] ArrTwoTrans = new double[(int)PRIME.Snom * 2 + 1];
-            int[] VariablePower = new int[(int)PRIME.Snom * 2 + 1];
 
-            for (int i = 0; i <= PRIME.Snom * 2; i += step)
+            double[] ArrTwoTrans = new double[(int)(PRIME.Snom * 2 / step) +1];
+
+            for (int i = 0; i < ArrTwoTrans.Length; i ++)
             {
-                ArrTwoTrans[i] = Math.Pow(i / PRIME.Snom, 2) * (PRIME.Pкз * SECOND.Pкз / (PRIME.Pкз + SECOND.Pкз)) + (PRIME.Pxx + SECOND.Pxx);
-                VariablePower[i] = i;
+                ArrTwoTrans[i] = Math.Pow(i*step / PRIME.Snom, 2) * (PRIME.Pкз * SECOND.Pкз / (PRIME.Pкз + SECOND.Pкз)) + (PRIME.Pxx + SECOND.Pxx);
+
             }
 
             return ArrTwoTrans;

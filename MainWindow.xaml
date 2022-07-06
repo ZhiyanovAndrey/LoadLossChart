@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LoadLossChart"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="800">
+        Title="MainWindow" Height="600" Width="500">
     <StackPanel>
         <WpfPlot Name="WPFDiagram" />
-
+        <Button Content="Построить график" Width="150" Click="Button_Click" />
+        <TextBlock x:Name="Textblock" TextWrapping="Wrap"/>
     </StackPanel>
 </Window>
